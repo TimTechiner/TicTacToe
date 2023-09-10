@@ -49,7 +49,7 @@ namespace TicTacToeGame.States
 
             if (key == ConsoleKey.R)
             {
-                StateMachine.ChangeState(new GameStartState(), inputProcessor);
+                StateMachine.ChangeState(new GameStartState(), field, inputProcessor);
             }
         }
 

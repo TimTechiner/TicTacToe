@@ -14,8 +14,8 @@ namespace TicTacToeGame.States
     public class TurnState : BaseState
     {
         private int currentPlayerIndex;
-        private Player[]? players;
-        private Field? field;
+        private Player[] players;
+        private Field field;
         private IInputProcessor inputProcessor;
         
         public override void Enter(params object[] parameters)

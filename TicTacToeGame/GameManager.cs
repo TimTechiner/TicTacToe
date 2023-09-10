@@ -32,7 +32,9 @@ namespace TicTacToeGame
         private static void StartGame()
         {
             var inputProcesor = new InputProcessor();
-            StateMachine.ChangeState(new GameStartState(), inputProcesor);
+            var field = new Field();
+
+            StateMachine.ChangeState(new GameStartState(), field, inputProcesor);
         }
 
         private static void Update()

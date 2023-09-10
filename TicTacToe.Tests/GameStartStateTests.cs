@@ -51,7 +51,7 @@ namespace TicTacToeGame.Tests
             var mock = new Mock<IInputProcessor>();
             mock.Setup(m => m.GetKey()).Returns(ConsoleKey.D1);
 
-            StateMachine.ChangeState(State, mock.Object);
+            StateMachine.ChangeState(State, new Field(), mock.Object);
 
             State.Update();
 
@@ -66,7 +66,7 @@ namespace TicTacToeGame.Tests
             var mock = new Mock<IInputProcessor>();
             mock.Setup(m => m.GetKey()).Returns(ConsoleKey.D1);
 
-            StateMachine.ChangeState(State, mock.Object);
+            StateMachine.ChangeState(State, new Field(), mock.Object);
 
             State.Update();
 
@@ -79,7 +79,7 @@ namespace TicTacToeGame.Tests
             var mock = new Mock<IInputProcessor>();
             mock.Setup(m => m.GetKey()).Returns(ConsoleKey.D2);
 
-            StateMachine.ChangeState(State, mock.Object);
+            StateMachine.ChangeState(State, new Field(), mock.Object);
 
             State.Update();
 
@@ -93,7 +93,7 @@ namespace TicTacToeGame.Tests
             var mock = new Mock<IInputProcessor>();
             mock.Setup(m => m.GetKey()).Returns(ConsoleKey.D2);
 
-            StateMachine.ChangeState(State, mock.Object);
+            StateMachine.ChangeState(State, new Field(), mock.Object);
 
             State.Update();
 
@@ -109,7 +109,7 @@ namespace TicTacToeGame.Tests
             var mock = new Mock<IInputProcessor>();
             mock.Setup(m => m.GetKey()).Returns(key);
 
-            StateMachine.ChangeState(State, mock.Object);
+            StateMachine.ChangeState(State, new Field(), mock.Object);
 
             State.Update();
 
@@ -123,7 +123,7 @@ namespace TicTacToeGame.Tests
 
             var mock = new Mock<IInputProcessor>();
 
-            State.Enter(mock.Object);
+            State.Enter(new Field(), mock.Object);
 
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);

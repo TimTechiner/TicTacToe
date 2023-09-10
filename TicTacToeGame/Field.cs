@@ -12,7 +12,7 @@ namespace TicTacToeGame
     {
         private const int FIELDSIZE = 3;
 
-        private Element[,] _field = new Element[FIELDSIZE, FIELDSIZE];
+        private readonly Element[,] _field = new Element[FIELDSIZE, FIELDSIZE];
 
         public bool IsFilled
         {
@@ -22,9 +22,17 @@ namespace TicTacToeGame
             }
         }
 
+        public bool IsEmpty
+        {
+            get
+            {
+                return _field.Cast<Element>().All(e => e == Element.None);
+            }
+        }
+
         public int Size => FIELDSIZE;
 
-        public event EventHandler<EventArgs> OnFieldChanged;
+        public event EventHandler<EventArgs>? OnFieldChanged;
 
         public Element this[(int, int) position]
         {
@@ -41,23 +49,12 @@ namespace TicTacToeGame
 
         public Field()
         {
-            InitializeField(_field);
-        }
-
-        private void InitializeField(Element[,] field)
-        {
-            for (int i = 0; i < field.GetLength(0); i++)
-            {
-                for (int j = 0; j < field.GetLength(1); j++)
-                {
-                    field[i, j] = Element.None;
-                }
-            }
+            InitializeField();
         }
 
         public void Reset()
         {
-            InitializeField(_field);
+            InitializeField();
         }
 
         public IEnumerable<(int,int)> GetFreeCells()
@@ -93,7 +90,8 @@ namespace TicTacToeGame
 
         private IEnumerable<Element> GetDiagonal(bool isMain)
         {
-            IEnumerable<(int, int)> cellsCoordinates = null;
+            IEnumerable<(int, int)> cellsCoordinates;
+
             if (isMain)
             {
                 cellsCoordinates = Enumerable.Range(0, Size).Select(e => (e, e));
@@ -120,6 +118,17 @@ namespace TicTacToeGame
                 else
                 {
                     yield return _field[k, index];
+                }
+            }
+        }
+
+        private void InitializeField()
+        {
+            for (int i = 0; i < _field.GetLength(0); i++)
+            {
+                for (int j = 0; j < _field.GetLength(1); j++)
+                {
+                    _field[i, j] = Element.None;
                 }
             }
         }

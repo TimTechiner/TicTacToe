@@ -31,19 +31,21 @@ namespace TicTacToeGame.States
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            if (parameters.Length != 1)
+            if (parameters.Length != 2)
             {
                 throw new ArgumentException(nameof(parameters));
             }
 
-            if (parameters[0] is not IInputProcessor)
+            if (parameters[0] is not Field || parameters[1] is not IInputProcessor)
             {
                 throw new ArgumentException(nameof(parameters));
             }
 
-            field = new Field();
+            field = (Field)parameters[0];
+            inputProcessor = (IInputProcessor)parameters[1];
+
+            field.Reset();
             players = new Player[N_PLAYERS];
-            inputProcessor = (IInputProcessor)parameters[0];
 
             Render();
         }
