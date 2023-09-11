@@ -16,7 +16,7 @@ namespace TicTacToeGame.Players
         public AIPlayer(Element element) : base(element) { }
         public override ICommand MakeTurn(Field field)
         {
-            var targetCell = Strategy.GetNextTargetCell(field);
+            var targetCell = Strategy.GetNextTargetCell(field, element);
 
             return new SetFieldElementCommand(field, Element, targetCell);
         }

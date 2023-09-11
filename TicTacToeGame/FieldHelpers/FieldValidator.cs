@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -40,6 +41,40 @@ namespace TicTacToeGame.FieldHelpers
             var winner = TryGetWinnerFromWinners(winners, field);
 
             return winner;
+        }
+
+        public static WinOutcome GetAlmostWinnerByRow(Field field, int rowIndex)
+        {
+            return GetAlmostWinnerByVector(rowIndex, field.GetRow);
+        }
+
+        public static WinOutcome GetAlmostWinnerByColumn(Field field, int columnIndex)
+        {
+            return GetAlmostWinnerByVector(columnIndex, field.GetColumn);
+        }
+
+        public static WinOutcome GetAlmostWinnerByMainDiagonal(Field field)
+        {
+            Func<int, IEnumerable<Element>> getMainDiagonal = (int x) => field.GetMainDiagonal();
+            return GetAlmostWinnerByVector(-1, getMainDiagonal);
+        }
+
+        public static WinOutcome GetAlmostWinnerByAntiDiagonal(Field field)
+        {
+            Func<int, IEnumerable<Element>> getAntiDiagonal = (int x) => field.GetAntiDiagonal();
+            return GetAlmostWinnerByVector(-1, getAntiDiagonal);
+        }
+
+        private static WinOutcome GetAlmostWinnerByVector(int vectorIndex, Func<int, IEnumerable<Element>> getVector)
+        {
+            var vector = getVector(vectorIndex);
+
+            int crossNumber = vector.Count(e => e == Element.Cross);
+            int circleNumber = vector.Count(e => e == Element.Circle);
+
+            if (crossNumber == 0 && circleNumber == 2) return WinOutcome.Circle;
+            else if (crossNumber == 2 && circleNumber == 0) return WinOutcome.Cross;
+            else return WinOutcome.None;
         }
 
         private static WinOutcome GetWinnerByRows(Field field)

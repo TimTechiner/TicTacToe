@@ -76,7 +76,7 @@ namespace TicTacToeGame.States
             {
                 case PlayerMode.SinglePlayer:
                     players[0] = new RealPlayer(inputProcessor);
-                    players[1] = new AIPlayer() { Strategy = new AIRandomStrategy() };
+                    players[1] = new AIPlayer() { Strategy = new AISmartStrategy() };
                     break;
                 case PlayerMode.MultiPlayer:
                     players[0] = new RealPlayer(inputProcessor);

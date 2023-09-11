@@ -13,6 +13,7 @@ namespace TicTacToeGame.Tests
             .Range(0, Field.FIELDSIZE)
             .SelectMany(e1 => Enumerable.Range(0, Field.FIELDSIZE).Select(e2 => (e1, e2)))
             .ToList();
+
         public static IEnumerable<Field> GenerateEmptyFields(int count)
         {
             return Enumerable.Range(0, count).Select(e => new Field());
@@ -39,7 +40,7 @@ namespace TicTacToeGame.Tests
 
             for (int i = 0; i < freeCellsNumber; i++)
             {
-                var index = Random.Shared.Next(availableCellCoordinates.Count());
+                var index = Random.Shared.Next(availableCellCoordinates.Count);
                 var coordinates = availableCellCoordinates[index];
 
                 randomCoordinates.Add(coordinates);

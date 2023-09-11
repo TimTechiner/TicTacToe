@@ -9,7 +9,7 @@ namespace TicTacToeGame.AIStrategies
 {
     public class AIRandomStrategy : IPlayStrategy
     {
-        public (int, int) GetNextTargetCell(Field field)
+        public (int, int) GetNextTargetCell(Field field, Element elementAI)
         {
             var freeCells = field.GetFreeCells();
 

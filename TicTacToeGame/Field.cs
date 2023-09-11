@@ -8,7 +8,7 @@ using TicTacToeGame.Enums;
 
 namespace TicTacToeGame
 {
-    public class Field
+    public class Field : ICloneable
     {
         public const int FIELDSIZE = 3;
 
@@ -50,6 +50,16 @@ namespace TicTacToeGame
         public Field()
         {
             InitializeField();
+        }
+
+        private Field(Element[,] field)
+        {
+            _field = field;
+        }
+
+        public object Clone()
+        {
+            return new Field(_field.Clone() as Element[,]);
         }
 
         public void Reset()
