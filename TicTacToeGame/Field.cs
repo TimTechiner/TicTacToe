@@ -10,7 +10,7 @@ namespace TicTacToeGame
 {
     public class Field
     {
-        private const int FIELDSIZE = 3;
+        public const int FIELDSIZE = 3;
 
         private readonly Element[,] _field = new Element[FIELDSIZE, FIELDSIZE];
 
