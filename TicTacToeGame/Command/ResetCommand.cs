@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicTacToeGame.Input;
+﻿using TicTacToeGame.Input;
 using TicTacToeGame.States;
 
 namespace TicTacToeGame.Command
 {
     public class ResetCommand : ICommand
     {
-        private Field field;
-        private IInputProcessor inputProcessor;
+        private readonly Field field;
+        private readonly IInputProcessor inputProcessor;
 
-        public ResetCommand(Field field, IInputProcessor inputprocessor)
+        public ResetCommand(Field field, IInputProcessor inputProcessor)
         {
             this.field = field;
-            this.inputProcessor = inputprocessor;
+            this.inputProcessor = inputProcessor;
         }
+
         public void Execute()
         {
             StateMachine.ChangeState(new GameStartState(), field, inputProcessor);

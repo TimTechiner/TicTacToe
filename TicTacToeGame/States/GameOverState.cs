@@ -1,8 +1,6 @@
 ﻿using TicTacToeGame.Enums;
 using TicTacToeGame.FieldHelpers;
 using TicTacToeGame.Input;
-using System;
-using System.Collections.Generic;
 using TicTacToeGame.Command;
 
 namespace TicTacToeGame.States

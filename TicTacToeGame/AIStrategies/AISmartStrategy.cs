@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using TicTacToeGame.Enums;
+﻿using TicTacToeGame.Enums;
 using TicTacToeGame.FieldHelpers;
 
 namespace TicTacToeGame.AIStrategies
@@ -28,9 +22,9 @@ namespace TicTacToeGame.AIStrategies
             var playerWinningPositions = GetPlayerWinningPositions(field, new List<Element>() { Element.Cross, Element.Circle }.FirstOrDefault(e => e != elementAI));
             var aiAlmostWinningPositions = GetAIAlmostWinningPositions(field, elementAI);
 
-            if (aiWinningPositions.Count() != 0) return aiWinningPositions.FirstOrDefault();
-            if (playerWinningPositions.Count() != 0) return playerWinningPositions.FirstOrDefault();
-            if (aiAlmostWinningPositions.Count() != 0) return aiAlmostWinningPositions.FirstOrDefault();
+            if (aiWinningPositions.Any()) return aiWinningPositions.FirstOrDefault();
+            if (playerWinningPositions.Any()) return playerWinningPositions.FirstOrDefault();
+            if (aiAlmostWinningPositions.Any()) return aiAlmostWinningPositions.FirstOrDefault();
 
             return new AIRandomStrategy().GetNextTargetCell(field, elementAI);
         }

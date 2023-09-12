@@ -1,11 +1,6 @@
 ﻿using TicTacToeGame.Command;
 using TicTacToeGame.Enums;
 using TicTacToeGame.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TicTacToeGame.Players
 {
@@ -24,7 +19,8 @@ namespace TicTacToeGame.Players
             [ConsoleKey.D9] = (2, 2),
         };
 
-        private IInputProcessor inputProcessor;
+        private readonly IInputProcessor inputProcessor;
+
         public RealPlayer(IInputProcessor inputProcessor) : base()
         {
             this.inputProcessor = inputProcessor;
