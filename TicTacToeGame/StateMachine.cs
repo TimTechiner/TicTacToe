@@ -1,19 +1,14 @@
 ﻿using TicTacToeGame.States;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TicTacToeGame
 {
     public static class StateMachine
     {
-        public static IState CurrentState { get; private set; }
+        public static IState CurrentState { get; private set; } = new BaseState();
 
         public static void Update()
         {
-            CurrentState!.Update();
+            CurrentState.Update();
         }
 
         public static void Render()

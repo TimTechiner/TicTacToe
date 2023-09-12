@@ -11,16 +11,18 @@ namespace TicTacToeGame.FieldHelpers
     {
         private const string CROSS_RENDER = "X";
         private const string CIRCLE_RENDER = "O";
+        private const string NONE_RENDER = " ";
         private const string CELL_SEPARATOR = "|";
+
         private static Dictionary<Element, string> ElementVisualizations = new Dictionary<Element, string>()
         {
-            [Element.None] = " ",
+            [Element.None] = NONE_RENDER,
             [Element.Circle] = CIRCLE_RENDER,
             [Element.Cross] = CROSS_RENDER
         };
 
         /// <summary>
-        /// Renders a passed field by rows separated by newlines.
+        /// Renders a passed square field by rows separated by newlines.
         /// </summary>
         /// <param name="field">Field to render.</param>
         public static void RenderField(Field field)

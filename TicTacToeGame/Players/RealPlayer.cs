@@ -23,6 +23,7 @@ namespace TicTacToeGame.Players
             [ConsoleKey.D8] = (2, 1),
             [ConsoleKey.D9] = (2, 2),
         };
+
         private IInputProcessor inputProcessor;
         public RealPlayer(IInputProcessor inputProcessor) : base()
         {

@@ -3,9 +3,7 @@ using TicTacToeGame.FieldHelpers;
 using TicTacToeGame.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TicTacToeGame.Command;
 
 namespace TicTacToeGame.States
 {
@@ -46,11 +44,14 @@ namespace TicTacToeGame.States
         public override void Update()
         {
             var key = inputProcessor.GetKey();
+            ICommand command = new EmptyCommand();
 
             if (key == ConsoleKey.R)
             {
-                StateMachine.ChangeState(new GameStartState(), field, inputProcessor);
+                command = new ResetCommand(field, inputProcessor);
             }
+
+            command.Execute();
         }
 
         public override void Render()

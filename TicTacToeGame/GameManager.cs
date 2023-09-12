@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicTacToeGame.AIStrategies;
-using TicTacToeGame.Command;
-using TicTacToeGame.CustomEventArgs;
-using TicTacToeGame.CustomExceptions;
-using TicTacToeGame.Enums;
-using TicTacToeGame.Input;
-using TicTacToeGame.Players;
+﻿using TicTacToeGame.Input;
 using TicTacToeGame.States;
 
 namespace TicTacToeGame

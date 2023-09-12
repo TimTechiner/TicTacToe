@@ -10,17 +10,8 @@ namespace TicTacToeGame.Players
 {
     public abstract class Player
     {
-        protected Element element;
-        public Element Element
-        {
-            get { return element; }
-            set { element = value; }
-        }
+        public Element Element { get; set; }
         protected Player() { }
-        protected Player(Element element)
-        {
-            this.element = element;
-        }
         public abstract ICommand MakeTurn(Field field);
     }
 }
