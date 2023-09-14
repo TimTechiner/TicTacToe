@@ -10,6 +10,16 @@ namespace TicTacToeGame.Command
 
         public ResetCommand(Field field, IInputProcessor inputProcessor)
         {
+            if (field == null)
+            {
+                throw new ArgumentNullException(nameof(field));
+            }
+
+            if (inputProcessor == null)
+            {
+                throw new ArgumentNullException(nameof(inputProcessor));
+            }
+
             this.field = field;
             this.inputProcessor = inputProcessor;
         }

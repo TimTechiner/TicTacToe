@@ -38,22 +38,52 @@ namespace TicTacToeGame.FieldHelpers
 
         public static WinOutcome GetAlmostWinnerByRow(Field field, int rowIndex)
         {
+            if (field == null)
+            {
+                throw new ArgumentNullException(nameof(field));
+            }
+
+            if (rowIndex < 0 || rowIndex >= field.Size)
+            {
+                throw new ArgumentOutOfRangeException(nameof(rowIndex));
+            }
+
             return GetAlmostWinnerByVector(rowIndex, field.GetRow);
         }
 
         public static WinOutcome GetAlmostWinnerByColumn(Field field, int columnIndex)
         {
+            if (field == null)
+            {
+                throw new ArgumentNullException(nameof(field));
+            }
+
+            if (columnIndex < 0 || columnIndex >= field.Size)
+            {
+                throw new ArgumentOutOfRangeException(nameof(columnIndex));
+            }
+
             return GetAlmostWinnerByVector(columnIndex, field.GetColumn);
         }
 
         public static WinOutcome GetAlmostWinnerByMainDiagonal(Field field)
         {
+            if (field == null)
+            {
+                throw new ArgumentNullException(nameof(field));
+            }
+
             Func<int, IEnumerable<Element>> getMainDiagonal = (int x) => field.GetMainDiagonal();
             return GetAlmostWinnerByVector(-1, getMainDiagonal);
         }
 
         public static WinOutcome GetAlmostWinnerByAntiDiagonal(Field field)
         {
+            if (field == null)
+            {
+                throw new ArgumentNullException(nameof(field));
+            }
+
             Func<int, IEnumerable<Element>> getAntiDiagonal = (int x) => field.GetAntiDiagonal();
             return GetAlmostWinnerByVector(-1, getAntiDiagonal);
         }

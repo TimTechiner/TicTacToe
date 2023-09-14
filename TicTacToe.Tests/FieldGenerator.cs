@@ -9,6 +9,21 @@ namespace TicTacToeGame.Tests
             .SelectMany(e1 => Enumerable.Range(0, Field.FIELDSIZE).Select(e2 => (e1, e2)))
             .ToList();
 
+        public static Field GenerateFieldByCellOneDimensionalIndices(IEnumerable<(int, Element)> indexElementPairs)
+        {
+            var field = new Field();
+
+            foreach (var indexElementPair in indexElementPairs)
+            {
+                int index = indexElementPair.Item1;
+                Element element = indexElementPair.Item2;
+
+                field[AllCellCoordinates[index]] = element;
+            }
+
+            return field;
+        }
+
         public static IEnumerable<Field> GenerateEmptyFields(int count)
         {
             return Enumerable.Range(0, count).Select(e => new Field());

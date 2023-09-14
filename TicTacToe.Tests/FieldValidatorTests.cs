@@ -2,6 +2,7 @@
 using TicTacToeGame.Enums;
 using TicTacToeGame.FieldHelpers;
 using NUnit.Framework;
+using System.ComponentModel.DataAnnotations;
 
 namespace TicTacToeGame.Tests
 {
@@ -261,6 +262,166 @@ namespace TicTacToeGame.Tests
         public void GetWinner_TwoWinnersFields_ThrowsFieldInvalidException(Field field)
         {
             Assert.Throws<FieldInvalidException>(() => FieldValidator.GetWinner(field));
+        }
+
+        [Test]
+        public void GetAlmostWinnerByRow_FirstRowTwoCrossesOnly_ReturnsCross()
+        {
+            var rowIndex = 0;
+            var field = FieldGenerator.GenerateFieldByCellOneDimensionalIndices(
+                new List<(int, Element)>()
+                {
+                    (0, Element.Cross),
+                    (1, Element.Cross),
+                });
+
+            var trueResult = WinOutcome.Cross;
+
+            var result = FieldValidator.GetAlmostWinnerByRow(field, rowIndex);
+
+            Assert.AreEqual(trueResult, result);
+        }
+
+        [Test]
+        public void GetAlmostWinnerByRow_SecondRowTwoCirclesOneCross_ReturnsNone()
+        {
+            var rowIndex = 1;
+            var field = FieldGenerator.GenerateFieldByCellOneDimensionalIndices(
+                new List<(int, Element)>()
+                {
+                    (3, Element.Circle),
+                    (5, Element.Circle),
+                    (4, Element.Cross)
+                });
+
+            var trueResult = WinOutcome.None;
+
+            var result = FieldValidator.GetAlmostWinnerByRow(field, rowIndex);
+
+            Assert.AreEqual(trueResult, result);
+        }
+
+        [Test]
+        public void GetAlmostWinnerByRow_NullField_ThrowsArgumentNullException()
+        {
+            var rowIndex = 0;
+            Assert.Throws<ArgumentNullException>(
+                () => FieldValidator.GetAlmostWinnerByRow(null, rowIndex));
+        }
+
+        [TestCase(-2)]
+        [TestCase(-1)]
+        [TestCase(Field.FIELDSIZE)]
+        public void GetAlmostWinnerByRow_PositionOutOfField_ThrowsArgumentOutOfRangeException(
+            int rowIndex)
+        {
+            var field = new Field();
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => FieldValidator.GetAlmostWinnerByRow(field, rowIndex));
+        }
+
+        [Test]
+        public void GetAlmostWinnerByColumn_FirstColumnTwoCrossesOnly_ReturnsCross()
+        {
+            var columnIndex = 0;
+            var field = FieldGenerator.GenerateFieldByCellOneDimensionalIndices(
+                new List<(int, Element)>()
+                {
+                    (0, Element.Cross),
+                    (3, Element.Cross),
+                });
+
+            var trueResult = WinOutcome.Cross;
+
+            var result = FieldValidator.GetAlmostWinnerByColumn(field, columnIndex);
+
+            Assert.AreEqual(trueResult, result);
+        }
+
+        [Test]
+        public void GetAlmostWinnerByColumn_SecondColumnTwoCirclesOneCross_ReturnsNone()
+        {
+            var columnIndex = 1;
+            var field = FieldGenerator.GenerateFieldByCellOneDimensionalIndices(
+                new List<(int, Element)>()
+                {
+                    (1, Element.Circle),
+                    (4, Element.Circle),
+                    (7, Element.Cross)
+                });
+
+            var trueResult = WinOutcome.None;
+
+            var result = FieldValidator.GetAlmostWinnerByColumn(field, columnIndex);
+
+            Assert.AreEqual(trueResult, result);
+        }
+
+        [Test]
+        public void GetAlmostWinnerByColumn_NullField_ThrowsArgumentNullException()
+        {
+            var columnIndex = 0;
+            Assert.Throws<ArgumentNullException>(
+                () => FieldValidator.GetAlmostWinnerByColumn(null, columnIndex));
+        }
+
+        [TestCase(-2)]
+        [TestCase(-1)]
+        [TestCase(Field.FIELDSIZE)]
+        public void GetAlmostWinnerByColumn_PositionOutOfField_ThrowsArgumentOutOfRangeException(
+            int columnIndex)
+        {
+            var field = new Field();
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => FieldValidator.GetAlmostWinnerByColumn(field, columnIndex));
+        }
+
+        [Test]
+        public void GetAlmostWinnerByMainDiagonal_TwoCrosses_ReturnsCross()
+        {
+            var field = FieldGenerator.GenerateFieldByCellOneDimensionalIndices(
+                new List<(int, Element)>()
+                {
+                    (0, Element.Cross),
+                    (8, Element.Cross),
+                });
+
+            var trueResult = WinOutcome.Cross;
+
+            var result = FieldValidator.GetAlmostWinnerByMainDiagonal(field);
+
+            Assert.AreEqual(trueResult, result);
+        }
+
+        [Test]
+        public void GetAlmostWinnerByMainDiagonal_NullField_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => FieldValidator.GetAlmostWinnerByMainDiagonal(null));
+        }
+
+        [Test]
+        public void GetAlmostWinnerByAntiDiagonal_TwoCrosses_ReturnsCross()
+        {
+            var field = FieldGenerator.GenerateFieldByCellOneDimensionalIndices(
+                new List<(int, Element)>()
+                {
+                    (2, Element.Cross),
+                    (6, Element.Cross),
+                });
+
+            var trueResult = WinOutcome.Cross;
+
+            var result = FieldValidator.GetAlmostWinnerByAntiDiagonal(field);
+
+            Assert.AreEqual(trueResult, result);
+        }
+
+        [Test]
+        public void GetAlmostWinnerByAntiDiagonal_NullField_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => FieldValidator.GetAlmostWinnerByAntiDiagonal(null));
         }
     }
 }

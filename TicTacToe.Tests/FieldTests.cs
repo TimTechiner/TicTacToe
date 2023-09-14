@@ -118,5 +118,23 @@ namespace TicTacToeGame.Tests
             Assert.AreEqual(expectedDiagonal, diagonal);
         }
 
+        [TestCaseSource(nameof(FilledFields))]
+        public void Clone_ReturnsNewFieldWithSameElementField(Field field)
+        {
+            var clonedField = field.Clone() as Field;
+
+            var areSame = true;
+
+            for (int i  = 0; i < field.Size; i++)
+            {
+                for (int j = 0; j < field.Size; j++)
+                {
+                    areSame = (areSame) ? clonedField[(i, j)] == field[(i, j)] : areSame;
+                }
+            }
+
+            Assert.IsTrue(areSame);
+            Assert.AreNotSame(field, clonedField);
+        }
     }
 }

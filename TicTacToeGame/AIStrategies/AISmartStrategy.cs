@@ -1,4 +1,5 @@
-﻿using TicTacToeGame.Enums;
+﻿using TicTacToeGame.CustomExceptions;
+using TicTacToeGame.Enums;
 using TicTacToeGame.FieldHelpers;
 
 namespace TicTacToeGame.AIStrategies
@@ -18,8 +19,21 @@ namespace TicTacToeGame.AIStrategies
                 throw new ArgumentNullException(nameof(field));
             }
 
+            if (elementAI == Element.None)
+            {
+                throw new PlayableElementException($"AI cannot play with element : {elementAI}");
+            }
+
             var aiWinningPositions = GetAIWinningPositions(field, elementAI);
-            var playerWinningPositions = GetPlayerWinningPositions(field, new List<Element>() { Element.Cross, Element.Circle }.FirstOrDefault(e => e != elementAI));
+
+            var playerWinningPositions = GetPlayerWinningPositions(
+                field : field, 
+                elementPlayer : new List<Element>() 
+                { 
+                    Element.Cross, 
+                    Element.Circle 
+                }.FirstOrDefault(e => e != elementAI));
+
             var aiAlmostWinningPositions = GetAIAlmostWinningPositions(field, elementAI);
 
             if (aiWinningPositions.Any()) return aiWinningPositions.FirstOrDefault();

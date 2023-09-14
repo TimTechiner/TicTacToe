@@ -1,4 +1,5 @@
-﻿using TicTacToeGame.Enums;
+﻿using TicTacToeGame.CustomExceptions;
+using TicTacToeGame.Enums;
 
 namespace TicTacToeGame.AIStrategies
 {
@@ -6,11 +7,21 @@ namespace TicTacToeGame.AIStrategies
     {
         public (int, int) GetNextTargetCell(Field field, Element elementAI)
         {
+            if (field == null)
+            {
+                throw new ArgumentNullException(nameof(field));
+            }
+
+            if (elementAI == Element.None)
+            {
+                throw new PlayableElementException($"AI cannot play with element : {elementAI}");
+            }
+
             var freeCells = field.GetFreeCells();
 
-            if (freeCells.Count() == 0)
+            if (!freeCells.Any())
             {
-                throw new Exception("Field is already filled");
+                throw new FieldFilledException("Field is already filled");
             }
 
             var index = Random.Shared.Next(freeCells.Count());

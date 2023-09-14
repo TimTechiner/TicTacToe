@@ -10,6 +10,11 @@ namespace TicTacToeGame.Command
 
         public SetFieldElementCommand(Field field, Element element, (int, int) position)
         {
+            if (field == null)
+            {
+                throw new ArgumentNullException(nameof(field));
+            }
+
             this.field = field;
             this.element = element;
             this.position = position;
